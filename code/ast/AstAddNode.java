@@ -1,3 +1,6 @@
+package ast;
+
+
 public class AstAddNode implements AstNodeData
 {
   private AstNode[] children;

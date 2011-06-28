@@ -1,3 +1,4 @@
+package ast;
 public class AstMaxNode implements AstNodeData
 {
   private AstNode[] children;

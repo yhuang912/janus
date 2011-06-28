@@ -1,5 +1,8 @@
+package ast;
 import java.util.HashMap;
 import java.util.LinkedList;
+
+
 
 // package private access
 class MinMaxRedundancy

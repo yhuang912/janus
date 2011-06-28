@@ -1,5 +1,16 @@
+package test;
+
 import java.io.PrintStream;
 import java.util.Random;
+
+import ast.AstAddNode;
+import ast.AstCharRef;
+import ast.AstMaxNode;
+import ast.AstNode;
+import ast.AstValueNode;
+import ast.AstVisitedMap;
+import ast.apps.AstSWSimilarityNode;
+
 
 public class SmithWatermanVerify
 {

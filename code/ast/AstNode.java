@@ -1,3 +1,4 @@
+package ast;
 // Container to actual node
 public class AstNode
 {

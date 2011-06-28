@@ -1,7 +1,29 @@
+package test;
+
 import java.io.PrintStream;
 
-public class EditDistanceTest
+import test.StringTestGenerator.Eraser;
+import test.StringTestGenerator.helper;
+
+import ast.AstNodeCounter;
+
+public class SmithWatermanTest
 {
+  private static int stringLens=50;
+  private static int unitCost[] = mkUnitCost(stringLens);
+
+  private static void setStringLens(int newlen)
+  {
+    stringLens = newlen;
+    unitCost = mkUnitCost(newlen);
+    gen.setStringLen(newlen);
+  }
+
+  private static int[] mkUnitCost(int len)
+  { int rv[] = new int[len];
+    for(int i=0;i<rv.length;++i) rv[i]=i+1;
+    return rv;
+  }
   private static StringTestGenerator.helper timePrinter 
     = new StringTestGenerator.helper(){
     public void useTest(char[] testA,char[] testB, float dataLabel,
@@ -10,7 +32,8 @@ public class EditDistanceTest
       printStream.println("A: "+new String(testA));
       printStream.println("B: "+new String(testB));
       long start = System.nanoTime(), end;
-      EditDistance ed = new EditDistance(new String(testA),new String(testB));
+      SmithWaterman ed 
+        = new SmithWaterman(new String(testA),new String(testB),unitCost);
       end = System.nanoTime();
       printStream.println(dataLabel+": "+(end-start)*1e-6);
     }
@@ -22,9 +45,8 @@ public class EditDistanceTest
     {
       printStream.println("A: "+new String(testA));
       printStream.println("B: "+new String(testB));
-      EditDistance ed = new EditDistance(new String(testA),new String(testB));
-      //AstPrinter.print(ed.getRoot(),printStream);
-      //printStream.println("");
+      SmithWaterman ed 
+        = new SmithWaterman(new String(testA),new String(testB),unitCost);
       printStream.println(dataLabel+": "+AstNodeCounter.count(ed.getRoot()));
     }
   };
@@ -32,9 +54,10 @@ public class EditDistanceTest
   private static StringTestGenerator.Eraser curEraser = gen.nBlockEraser(1);
 
   public static void parseCommandLine(String[] args)
-  { for(int i=0;i<args.length;++i) 
+  { gen.setStringLen(stringLens);
+    for(int i=0;i<args.length;++i) 
     { if(args[i].startsWith("-deflen="))
-        gen.setStringLen(
+        setStringLens(
             Integer.parseInt(args[i].substring("-deflen=".length())));
       if(args[i].equals("-scatrErase"))
         curEraser = gen.scatterEraser;
@@ -47,7 +70,6 @@ public class EditDistanceTest
   public static void main(String[] args)
   {
     parseCommandLine(args);
-    //testUser = new EditDistanceVerify();
     System.out.println("\n\nScatter subs\n--------------------");
     gen.singleMutationTest(curEraser,System.out,.1f);
     System.out.println("\n\nSingle block test\n---------------------");

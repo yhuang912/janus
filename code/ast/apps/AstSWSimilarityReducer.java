@@ -1,3 +1,9 @@
+package ast.apps;
+import ast.AstCharRef;
+import ast.AstNode;
+import ast.AstReducer;
+import ast.AstValueNode;
+
 public class AstSWSimilarityReducer
 {
   public boolean reduce(AstNode node,AstReducer.ReduceInfo nodeinfo)

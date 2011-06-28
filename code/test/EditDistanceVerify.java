@@ -1,5 +1,20 @@
+package test;
+
 import java.io.PrintStream;
 import java.util.Random;
+
+import test.StringTestGenerator.helper;
+
+
+import ast.AstAddNode;
+import ast.AstCharRef;
+import ast.AstMinNode;
+import ast.AstNequNode;
+import ast.AstNode;
+import ast.AstNodeCounter;
+import ast.AstValueNode;
+import ast.AstVisitedMap;
+
 
 public class EditDistanceVerify implements StringTestGenerator.helper
 {

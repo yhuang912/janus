@@ -1,3 +1,6 @@
+package ast;
+import test.EditDistance;
+
 
 /* Now here's the problem. The cicuit generator probably only wants binary
    operations. But I support Add, Min etc. with many operands. So I will 

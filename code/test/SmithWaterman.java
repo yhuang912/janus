@@ -1,4 +1,15 @@
+package test;
+
 import java.util.Scanner;
+
+import ast.AstAddNode;
+import ast.AstMaxNode;
+import ast.AstNode;
+import ast.AstPrinter;
+import ast.AstReducer;
+import ast.AstValueNode;
+import ast.apps.AstSWSimilarityNode;
+
 
 public class SmithWaterman
 {

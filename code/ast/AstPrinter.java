@@ -1,4 +1,9 @@
+package ast;
+
 import java.io.PrintStream;
+
+import ast.apps.AstSWSimilarityNode;
+
 
 
 public class AstPrinter

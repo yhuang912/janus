@@ -1,9 +1,16 @@
+package ast;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.ListIterator;
 import java.util.Map;
+
+import ast.MinMaxRedundancy.HashKey;
+import ast.MinMaxRedundancy.Result;
+
+
 
 public class AstMinReducer 
 {

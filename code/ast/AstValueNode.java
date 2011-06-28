@@ -1,3 +1,5 @@
+package ast;
+
 public class AstValueNode implements AstNodeData
 {
   private int value;

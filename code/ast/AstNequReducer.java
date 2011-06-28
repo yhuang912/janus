@@ -1,3 +1,5 @@
+package ast;
+
 public class AstNequReducer
 {
   public boolean reduce(AstNode node,AstReducer.ReduceInfo nodeinfo)

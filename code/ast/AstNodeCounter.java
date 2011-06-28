@@ -1,3 +1,5 @@
+package ast;
+
 public class AstNodeCounter
 {
   /** The only public method in this class :) .

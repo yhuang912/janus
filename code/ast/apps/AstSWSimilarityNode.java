@@ -1,3 +1,8 @@
+package ast.apps;
+import ast.AstCharRef;
+import ast.AstNode;
+import ast.AstNodeData;
+
 // it is a leaf node. AstCharRefs are not AstNode types
 // represents similarity of two characters in a run of SmithWaterman
 

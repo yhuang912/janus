@@ -1,3 +1,4 @@
+package ast;
 // Reference to a symbolic or concrete character from an AstNode
 public class AstCharRef
 {

@@ -1,4 +1,6 @@
+package ast;
 import java.util.WeakHashMap;
+
 
 public class AstVisitedMap<V>
 {

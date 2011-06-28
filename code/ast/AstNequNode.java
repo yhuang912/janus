@@ -1,3 +1,4 @@
+package ast;
 // it is a leaf node. AstCharRefs are not AstNode types
 public class AstNequNode implements AstNodeData
 {

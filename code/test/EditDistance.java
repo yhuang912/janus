@@ -1,4 +1,15 @@
+package test;
+
 import java.util.Scanner;
+
+import ast.AstAddNode;
+import ast.AstMinNode;
+import ast.AstNequNode;
+import ast.AstNode;
+import ast.AstPrinter;
+import ast.AstReducer;
+import ast.AstValueNode;
+
 
 public class EditDistance
 {
@@ -19,7 +30,7 @@ public class EditDistance
     for(ai=1;ai<=an;++ai)
     { next[0] = AstValueNode.create(ai);
       for(bi=1;bi<=bn;++bi)
-      { 
+      {
         AstNode cmp = AstNequNode.create(a,ai-1,b,bi-1);
         AstNode add1ops[] = {cur[bi],AstValueNode.create(1)};
         AstNode add2ops[] = {next[bi-1],AstValueNode.create(1)};
@@ -64,48 +75,48 @@ public class EditDistance
 
   //---------------------------------------------------------------------
 
-  private static class TotalObjectCounter
-  {
-    private static class ObjectCount
-    {
-      public int count;
-      public int recentTraversalId;
-    };
-    private AstVisitedMap<ObjectCount> visited =
-      new AstVisitedMap<ObjectCount>();
-    private int tid = 0;
-    public void newCount() { tid++; }
-    public int count(AstNode root) { return countHelper(root); }
-    private int countHelper(AstNode node)
-    { if(visited.isVisited(node))
-      { ObjectCount oc = visited.valueAt(node);
-        if(oc.recentTraversalId == tid) return 0;
-        else
-        { oc.recentTraversalId = tid;
-          return oc.count;
-        }
-      }
-      ObjectCount oc = new ObjectCount();
-      oc.recentTraversalId = tid;
-      int rv=1;
-      AstNode[] child = node.children();
-      for(int i=0;i<child.length;++i) rv+=countHelper(child[i]);
-      oc.count=rv;
-      visited.visit(node,oc);
-      return rv;
-    }
-
-  }
-
-  private TotalObjectCounter totalObjectCounter;
-  private void printMemUsage(int iter,AstNode[] curRow,AstNode[] nextRow)
-  {
-    if(totalObjectCounter==null) totalObjectCounter = new TotalObjectCounter();
-    int i,rv=0;
-    totalObjectCounter.newCount();
-    for(i=0;i<curRow.length;++i) rv+=totalObjectCounter.count(curRow[i]);
-    for(i=0;i<nextRow.length;++i) rv+=totalObjectCounter.count(nextRow[i]);
-    System.out.println("Iter "+iter+": "+rv);
-  }
+//  private static class TotalObjectCounter
+//  {
+//    private static class ObjectCount
+//    {
+//      public int count;
+//      public int recentTraversalId;
+//    };
+//    private AstVisitedMap<ObjectCount> visited =
+//      new AstVisitedMap<ObjectCount>();
+//    private int tid = 0;
+//    public void newCount() { tid++; }
+//    public int count(AstNode root) { return countHelper(root); }
+//    private int countHelper(AstNode node)
+//    { if(visited.isVisited(node))
+//      { ObjectCount oc = visited.valueAt(node);
+//        if(oc.recentTraversalId == tid) return 0;
+//        else
+//        { oc.recentTraversalId = tid;
+//          return oc.count;
+//        }
+//      }
+//      ObjectCount oc = new ObjectCount();
+//      oc.recentTraversalId = tid;
+//      int rv=1;
+//      AstNode[] child = node.children();
+//      for(int i=0;i<child.length;++i) rv+=countHelper(child[i]);
+//      oc.count=rv;
+//      visited.visit(node,oc);
+//      return rv;
+//    }
+//
+//  }
+//
+//  private TotalObjectCounter totalObjectCounter;
+//  private void printMemUsage(int iter,AstNode[] curRow,AstNode[] nextRow)
+//  {
+//    if(totalObjectCounter==null) totalObjectCounter = new TotalObjectCounter();
+//    int i,rv=0;
+//    totalObjectCounter.newCount();
+//    for(i=0;i<curRow.length;++i) rv+=totalObjectCounter.count(curRow[i]);
+//    for(i=0;i<nextRow.length;++i) rv+=totalObjectCounter.count(nextRow[i]);
+//    System.out.println("Iter "+iter+": "+rv);
+//  }
 
 }

@@ -1,3 +1,4 @@
+package ast;
 public class AstMinNode implements AstNodeData
 {
   private AstNode[] children;

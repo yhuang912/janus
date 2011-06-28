@@ -1,6 +1,12 @@
+package ast;
+
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Stack;
+
+import ast.apps.AstSWSimilarityNode;
+import ast.apps.AstSWSimilarityReducer;
+
 
 public class AstReducer
 {
