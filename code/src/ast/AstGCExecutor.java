@@ -11,24 +11,49 @@ public class AstGCExecutor {
 
 		public void calculateFromChildren(AstNode current, NodeData childLeft,
 				NodeData childRight) {
-			// this.nodeCount = childLeft.nodeCount+childRight.nodeCount+1;
-			// calculate any other value you need here
-			/*
-			 * You can check for the current node type like this:
-			 * if(current.getType()==AstAddNode.class) ... else
-			 * if(current.getType()==AstMinNode.class) ...
-			 */
+
+			 if (current.getType()==AstAddNode.class)
+				 executeADD();
+			 else if(current.getType()==AstMinNode.class) 
+				 executeMIN();
+			 else if (current.getType()==AstMaxNode.class) 
+				 executeMAX();
 		}
 
 		public void calculateFromLeaf(AstNode leaf) {
-			// if(leaf.getType()==AstValueNode.class)
-			// this.nodeCount = 1; // leaf representing constant integer value
-			// else if(leaf.getType()==AstNequNode.class)
-			// this.nodeCount = 3; // leaf representing comparison between chars
-			// else
-			// this.nodeCount = 1; // I don't really know any other leaf right
-			// now
+			 if(leaf.getType()==AstValueNode.class)
+				 buildValueState();
+			 else if(leaf.getType()==AstNequNode.class)
+				 executeNEQU();
+			 else
+				 assert false : "Unknown type of leaf nodes";
 		}
+		
+		private void executeNEQU() {
+			// TODO Auto-generated method stub
+			
+		}
+
+		private void buildValueState() {
+			// TODO Auto-generated method stub
+			
+		}
+
+		public void executeMAX() {
+			// TODO Auto-generated method stub
+			
+		}
+
+		public void executeMIN() {
+			// TODO Auto-generated method stub
+			
+		}
+
+		public void executeADD() {
+			// TODO Auto-generated method stub
+			
+		}
+
 	}
 
 	// ---------- You shouldn't have to modify anything beyond this -------
