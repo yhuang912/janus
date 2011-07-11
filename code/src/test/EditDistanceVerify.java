@@ -13,6 +13,7 @@ import ast.AstNode;
 import ast.AstNodeCounter;
 import ast.AstValueNode;
 import ast.AstVisitedMap;
+import Program.EditDistance;
 
 public class EditDistanceVerify implements StringTestGenerator.helper {
 	private AstVisitedMap<Integer> nodeValue;

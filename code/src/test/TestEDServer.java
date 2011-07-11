@@ -11,52 +11,64 @@ import Utils.*;
 import Program.*;
 
 class TestEDServer {
-    static BigInteger dna;
-    static boolean autogen;
-    static int n;
-    
-    static Random rnd = new Random();
+	static BigInteger dna;
+	static BigInteger secMask;
+	static boolean autogen;
+	static int n;
 
-    private static void printUsage() {
-	System.out.println("Usage: java TestEDServer [{-d, --dna} dna] [{-L, --EDBitLength} L] [{-a, --autogen}] [{-n, --DNALength} length]");
-    }
+	static Random rnd = new Random();
 
-    private static void process_cmdline_args(String[] args) {
-	CmdLineParser parser = new CmdLineParser();
-	CmdLineParser.Option optionAuto = parser.addBooleanOption('a', "autogen");
-	CmdLineParser.Option optionDNALength = parser.addIntegerOption('n', "DNALength");
-	CmdLineParser.Option optionSigma = parser.addIntegerOption('g', "sigma");
-	
-	try {
-	    parser.parse(args);
-	}
-	catch (CmdLineParser.OptionException e) {
-	    System.err.println(e.getMessage());
-	    printUsage();
-	    System.exit(2);
+	private static void printUsage() {
+		System.out
+				.println("Usage: java TestEDServer [{-d, --dna} dna] [{-L, --EDBitLength} L] [{-a, --autogen}] [{-n, --DNALength} length]");
 	}
 
-	// dna = (String) parser.getOptionValue(optionDNA, new String("AGCT"));
-	// EditDistanceServer.L = ((Integer) parser.getOptionValue(optionL, 5)).intValue();
-	autogen = (Boolean) parser.getOptionValue(optionAuto, false);
-	n = ((Integer) parser.getOptionValue(optionDNALength, new Integer(100))).intValue();
-	EditDistanceCommon.sigma = ((Integer) parser.getOptionValue(optionSigma, new Integer(2))).intValue();
-    }
+	private static void process_cmdline_args(String[] args) {
+		CmdLineParser parser = new CmdLineParser();
+		CmdLineParser.Option optionAuto = parser.addBooleanOption('a',
+				"autogen");
+		CmdLineParser.Option optionDNALength = parser.addIntegerOption('n',
+				"DNALength");
+		CmdLineParser.Option optionSigma = parser
+				.addIntegerOption('g', "sigma");
 
-    private static void generateData() throws Exception {
-	dna = new BigInteger(EditDistanceCommon.sigma*n, rnd);
-	// dna = EditDistanceServer.getDNAString(r, n);
-    }
+		try {
+			parser.parse(args);
+		} catch (CmdLineParser.OptionException e) {
+			System.err.println(e.getMessage());
+			printUsage();
+			System.exit(2);
+		}
 
-    public static void main(String[] args) throws Exception {
+		autogen = (Boolean) parser.getOptionValue(optionAuto, false);
+		n = ((Integer) parser.getOptionValue(optionDNALength, new Integer(100)))
+				.intValue();
+		EditDistanceCommon.sigma = ((Integer) parser.getOptionValue(
+				optionSigma, new Integer(2))).intValue();
+	}
 
-	StopWatch.pointTimeStamp("Starting program");
-	process_cmdline_args(args);
+	private static void generateData() throws Exception {
+		dna = new BigInteger(EditDistanceCommon.sigma * n, rnd);
+		
+		BigInteger temp = new BigInteger(n, rnd);
+		secMask = BigInteger.ZERO;
+		BigInteger ones = BigInteger.valueOf((1 << EditDistanceCommon.sigma) - 1);
+		for (int i = 0; i < n; i++) {
+			secMask = secMask.shiftLeft(EditDistanceCommon.sigma);
+			if (temp.testBit(i))
+				secMask = secMask.or(ones);
+		}
+		// dna = EditDistanceServer.getDNAString(r, n);
+	}
 
-	if (autogen)
-	    generateData();
+	public static void main(String[] args) throws Exception {
+		StopWatch.pointTimeStamp("Starting program");
+		process_cmdline_args(args);
 
-	EditDistanceServer edserver = new EditDistanceServer(dna, n);
-	edserver.run();
-    }
+		if (autogen)
+			generateData();
+
+		EditDistanceServer edserver = new EditDistanceServer(dna, secMask, n);
+		edserver.run();
+	}
 }

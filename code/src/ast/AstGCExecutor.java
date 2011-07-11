@@ -1,6 +1,6 @@
 package ast;
 
-import test.EditDistance;
+import Program.EditDistance;
 import YaoGC.State;
 
 public class AstGCExecutor {

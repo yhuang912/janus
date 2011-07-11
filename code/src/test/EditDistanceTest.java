@@ -6,6 +6,7 @@ import test.StringTestGenerator.Eraser;
 import test.StringTestGenerator.helper;
 
 import ast.AstNodeCounter;
+import Program.EditDistance;
 
 public class EditDistanceTest {
 	private static StringTestGenerator.helper timePrinter = new StringTestGenerator.helper() {

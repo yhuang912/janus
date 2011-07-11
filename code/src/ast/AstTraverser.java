@@ -1,6 +1,6 @@
 package ast;
 
-import test.EditDistance;
+import Program.EditDistance;
 
 /* Now here's the problem. The circuit generator probably only wants binary
  operations. But I support Add, Min etc. with many operands. So I will 
